@@ -80,7 +80,7 @@ class ConsultaUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'accounts:login'
     template_name = 'clientes/cadastro.html'
     fields = ['agenda']
-    success_url = reverse_lazy('medicos:Consulta_lista')
+    success_url = reverse_lazy('clientes:consulta_list')
     
     def form_valid(self, form):
         form.instance.cliente = Cliente.objects.get(user=self.request.user)
@@ -123,6 +123,18 @@ class PlanoSaudeCreateView(LoginRequiredMixin, TestMixinIsAdmin, CreateView):
     fields = ['plano']
     success_url = reverse_lazy('clientes:plano_lista')
 
+
+class PlanoSaudeDeleteView(LoginRequiredMixin, TestMixinIsAdmin, DeleteView):
+    model = PlanoSaude
+    success_url = reverse_lazy('clientes:plano_lista')
+    template_name = 'form_delete.html'
+
+    def get_success_url(self):
+        messages.success(self.request, "Plano excluído com sucesso!")
+        return reverse_lazy('clientes:plano_lista')
+
+
+
 class PlanoSaudeListView(LoginRequiredMixin, TestMixinIsAdmin, ListView):
     login_url = 'accounts:login'
     template_name = 'clientes/plano_list.html'
@@ -139,4 +151,5 @@ consulta_atualizar = ConsultaUpdateView.as_view()
 consulta_excluir = ConsultaDeleteView.as_view()
 plano_cadastro = PlanoSaudeCreateView.as_view()
 plano_lista = PlanoSaudeListView.as_view()
+plano_excluir = PlanoSaudeDeleteView.as_view()
 
