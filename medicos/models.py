@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from django.db.models.fields.related import ForeignKey
+from django_cpf_cnpj.fields import CPFField
 
 
 class Especialidade(models.Model):
@@ -15,22 +16,41 @@ class Especialidade(models.Model):
     
 class Medico(models.Model):
     nome = models.CharField(verbose_name="Nome", max_length=200)
-    email = models.EmailField(verbose_name="Email")
     crm = models.CharField(verbose_name="CRM", max_length=200)
+    especialidade = ForeignKey(Especialidade,
+                               on_delete=models.CASCADE,
+                               related_name='medicos')
+    cpf = CPFField(verbose_name="CPF",
+                   max_length=50,
+                   unique=True, )
     phone_regex = RegexValidator(
-    regex=r'^\+?1?\d{9,15}$',
-    message="O número precisa estar neste formato: \
-                    '+99 99 9999-0000'.")
+        regex=r'^\+?1?\d{9,15}$',
+        message="O número precisa estar neste formato: \
+                       '+99 99 9999-0000'.")
 
     telefone = models.CharField(verbose_name="Telefone",
                                 validators=[phone_regex],
                                 max_length=17, null=True, blank=True)
-    especialidade = ForeignKey(Especialidade,
-                               on_delete=models.CASCADE,
-                               related_name='medicos')
+    SEXO = (
+        ("MAS", "Maculino"),
+        ("FEM", "Feminino")
+    )
+
+    sexo = models.CharField(max_length=9, choices=SEXO, )
+    email = models.EmailField(verbose_name="Email")
+    endlogradouro = models.CharField(max_length=200, verbose_name='Logradouro')
+    endbairro = models.CharField(max_length=50, verbose_name='Bairro')
+    endcep = models.CharField(max_length=8, verbose_name='CEP')
+    endnumero = models.CharField(max_length=4, verbose_name='Número')
+    endcomplemento = models.CharField(max_length=100, verbose_name='Complemento', null=True, blank=True)
+    endcidade = models.CharField(max_length=100, verbose_name='Cidade')
+    enduf = models.CharField(max_length=2, verbose_name='UF')
+    nacionalidade = models.CharField(max_length=50, verbose_name='Nacionalidade')
     
     def __str__(self):
         return f'{self.nome}'
+
+
 
 def validar_dia(value):
     today = date.today()
