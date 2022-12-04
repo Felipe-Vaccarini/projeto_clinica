@@ -1,0 +1,33 @@
+{% extends "accounts/index.html" %}
+
+{% block title %}
+   Plano
+{% endblock %}
+
+{% block accounts_container %}
+<h2>Plano</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Nome
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for plano in object_list %}
+        <tr>
+            <td>
+                <a href=""># {{ plano.pk }}</a>
+            </td>
+            <td>
+                {{ plano.plano }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
