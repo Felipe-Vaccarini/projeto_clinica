@@ -38,8 +38,32 @@ class EspecialidadeCreateView(LoginRequiredMixin, TestMixinIsAdmin, CreateView):
     model = Especialidade
     login_url = 'accounts:login'
     template_name = 'medicos/cadastro.html'
-    fields = ['nome',]
+    fields = ['nome']
     success_url = reverse_lazy('medicos:especialidade_lista')
+
+
+class EspecialidadeUpdateView(LoginRequiredMixin, TestMixinIsAdmin, UpdateView):
+    model = Especialidade
+    login_url = 'accounts:login'
+    template_name = 'medicos/especialidade_cadastro.html'
+    fields = ['nome']
+    success_url = reverse_lazy('medicos:especialidade_lista')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class EspecialidadeDeleteView(LoginRequiredMixin, TestMixinIsAdmin, DeleteView):
+    model = Especialidade
+    success_url = reverse_lazy('medicos:especialidade_lista')
+    template_name = 'form_delete.html'
+
+    def get_success_url(self):
+        messages.success(self.request, "Especialidade excluída com sucesso!")
+        return reverse_lazy('medicos:especialidade_lista')
+
+
     
 class EspecialidadeListView(LoginRequiredMixin, TestMixinIsAdmin, ListView):
     
@@ -96,10 +120,10 @@ class AgendaListView(LoginRequiredMixin, TestMixinIsAdmin, ListView):
 medico_cadastro = MedicoCreateView.as_view()
 medico_lista = MedicoListView.as_view()
 especialidade_cadastro = EspecialidadeCreateView.as_view()
+especialidade_atualizar = EspecialidadeUpdateView.as_view()
 especialidade_lista = EspecialidadeListView.as_view()
+especialidade_deletar = EspecialidadeDeleteView.as_view()
 agenda_cadastro = AgendaCreateView.as_view()
 agenda_atualizar = AgendaUpdateView.as_view()
 agenda_lista = AgendaListView.as_view()
 agenda_deletar = AgendaDeleteView.as_view()
-
-
