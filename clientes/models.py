@@ -8,7 +8,7 @@ from django.db.models.fields.related import ForeignKey
 
 
 class PlanoSaude(models.Model):
-    plano = models.CharField(verbose_name="Plano", max_length=200)
+    plano = models.CharField(max_length=200, verbose_name="Plano")
 
     def __str__(self):
         return f'{self.plano}'
@@ -16,6 +16,18 @@ class PlanoSaude(models.Model):
 
 class Cliente(models.Model):
     plano = models.ForeignKey(PlanoSaude, on_delete=models.PROTECT, related_name='clientes')
+    endlogradouro = models.CharField(max_length=200, verbose_name='Logradouro')
+    endbairro = models.CharField(max_length=50, verbose_name='Bairro')
+    endcep = models.CharField(max_length=8, verbose_name='CEP')
+    endnumero = models.CharField(max_length=4, verbose_name='Número')
+    endcomplemento = models.CharField(max_length=100, verbose_name='Complemento', null=True, blank=True)
+    endcidade = models.CharField(max_length=100, verbose_name='Cidade')
+    enduf = models.CharField(max_length=2, verbose_name='UF')
+    nacionalidade = models.CharField(max_length=50, verbose_name='Nacionalidade')
+
+
+
+
     SEXO = (
         ("MAS", "Maculino"),
         ("FEM", "Feminino")
