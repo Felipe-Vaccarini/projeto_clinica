@@ -6,59 +6,5 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         <p><a class="btn btn-primary">Saiba mais</a></p>
     </div>
-    <table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>
-                ID
-            </th>
-            <th>
-                Nome
-            </th>
-            <th>
-                E-mail
-            </th>
-            <th>
-                CRM
-            </th>
-            <th>
-                Especialidade
-            </th>
-            <th>
-                Telefone
-            </th>
-              <th>
-                Foto
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for medico in object_list %}
-        <tr>
-            <td>
-                <a href=""># {{ medico.pk }}</a>
-            </td>
-            <td>
-                {{ medico.nome }}
-            </td>
-            <td>
-                {{ medico.email }}
-            </td>
-            <td>
-                {{ medico.crm }}
-            </td>
-            <td>
-                {{ medico.especialidade }}
-            </td>
-            <td>
-                {{ medico.telefone }}
-            </td>
-             <td>
-                <img height="150" width="150" src="{{ medico.foto.url }}">
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 
 {% endblock %}

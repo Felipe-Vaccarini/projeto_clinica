@@ -17,9 +17,9 @@
                   <a href="{% url 'accounts:update_password'%}" class="list-group-item">Alterar Senha</a>
                   <a href="{% url 'clientes:cliente_atualizar'%}" class="list-group-item"> Dados Complementares </a>
                   <a href="{% url 'clientes:consulta_list'%}" class="list-group-item">Minhas Consultas</a>
+                  <a href="{% url 'medicos:medicos_lista'%}" class="list-group-item">Medicos</a>
                   {% if request.user.is_staff or request.user.is_superuser %}
                   <a href="{% url 'medicos:agenda_lista'%}" class="list-group-item">Agendas</a>
-                  <a href="{% url 'medicos:medicos_lista'%}" class="list-group-item">Medicos</a>
                   <a href="{% url 'medicos:especialidade_lista'%}" class="list-group-item">Especialidade</a>
                   <a href="{% url 'clientes:plano_lista'%}" class="list-group-item">Planos de Saúde</a>
                   {% endif %}

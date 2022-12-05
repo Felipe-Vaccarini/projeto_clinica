@@ -10,10 +10,14 @@
     <thead>
         <tr>
             <th>
-                ID
+                Foto
             </th>
             <th>
                 Nome
+            </th>
+            {% if user.is_superuser %}
+            <th>
+                ID
             </th>
             <th>
                 E-mail
@@ -22,13 +26,14 @@
                 CRM
             </th>
             <th>
+                CPF
+            </th>
+            {% endif %}
+            <th>
                 Especialidade
             </th>
             <th>
                 Telefone
-            </th>
-              <th>
-                Foto
             </th>
         </tr>
     </thead>
@@ -36,10 +41,14 @@
         {% for medico in object_list %}
         <tr>
             <td>
-                <a href=""># {{ medico.pk }}</a>
+                <img height="250" width="250" src="{{ medico.foto.url }}">
             </td>
             <td>
                 {{ medico.nome }}
+            </td>
+            {% if user.is_superuser %}
+            <td>
+                <a href=""># {{ medico.pk }}</a>
             </td>
             <td>
                 {{ medico.email }}
@@ -48,13 +57,14 @@
                 {{ medico.crm }}
             </td>
             <td>
+                {{ medico.cpf }}
+            </td>
+            {% endif %}
+            <td>
                 {{ medico.especialidade }}
             </td>
             <td>
                 {{ medico.telefone }}
-            </td>
-             <td>
-                <img height="150" width="150" src="{{ medico.foto.url }}">
             </td>
         </tr>
         {% endfor %}

@@ -26,7 +26,7 @@ class MedicoCreateView(LoginRequiredMixin, TestMixinIsAdmin, CreateView):
               'endcep', 'endnumero', 'endcomplemento', 'endcidade', 'enduf', 'nacionalidade', 'foto']
     success_url = reverse_lazy('medicos:medicos_lista')
     
-class MedicoListView(LoginRequiredMixin, TestMixinIsAdmin, ListView):
+class MedicoListView(ListView):
     
     login_url = 'accounts:login'
     template_name = 'medicos/medicos_list.html'
