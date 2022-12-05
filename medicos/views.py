@@ -23,7 +23,7 @@ class MedicoCreateView(LoginRequiredMixin, TestMixinIsAdmin, CreateView):
     login_url = 'accounts:login'
     template_name = 'medicos/cadastro.html'
     fields = ['nome', 'crm', 'especialidade', 'cpf', 'telefone', 'sexo', 'email', 'endlogradouro', 'endbairro',
-              'endcep', 'endnumero', 'endcomplemento', 'endcidade', 'enduf', 'nacionalidade']
+              'endcep', 'endnumero', 'endcomplemento', 'endcidade', 'enduf', 'nacionalidade', 'foto']
     success_url = reverse_lazy('medicos:medicos_lista')
     
 class MedicoListView(LoginRequiredMixin, TestMixinIsAdmin, ListView):

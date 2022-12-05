@@ -46,6 +46,7 @@ class Medico(models.Model):
     endcidade = models.CharField(max_length=100, verbose_name='Cidade')
     enduf = models.CharField(max_length=2, verbose_name='UF')
     nacionalidade = models.CharField(max_length=50, verbose_name='Nacionalidade')
+    foto = models.ImageField(upload_to='foto/')
     
     def __str__(self):
         return f'{self.nome}'

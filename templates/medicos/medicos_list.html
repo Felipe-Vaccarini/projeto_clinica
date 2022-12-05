@@ -19,13 +19,16 @@
                 E-mail
             </th>
             <th>
-                CRM 
+                CRM
             </th>
             <th>
                 Especialidade
             </th>
             <th>
                 Telefone
+            </th>
+              <th>
+                Foto
             </th>
         </tr>
     </thead>
@@ -49,6 +52,9 @@
             </td>
             <td>
                 {{ medico.telefone }}
+            </td>
+             <td>
+                <img height="150" width="150" src="{{ medico.foto.url }}">
             </td>
         </tr>
         {% endfor %}
