@@ -5,7 +5,26 @@ from django.contrib import messages
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Count
+from chartjs.views.lines import BaseLineChartView
 from .models import Cliente, Consulta, PlanoSaude
+
+class DadosGraficoPlanosView(BaseLineChartView):
+    def get_labels(self):
+        labels = []
+        queryset = PlanoSaude.objects.order_by('id')
+        for plano in queryset:
+            labels.append(plano.plano)
+        return labels
+
+    def get_data(self):
+        resultado = []
+        dados = []
+        queryset = PlanoSaude.objects.order_by('id').annotate(total=Count('clientes'))
+        for linha in queryset:
+            dados.append(int(linha.total))
+        resultado.append(dados)
+        return resultado
 
 
 class TestMixinIsAdmin(UserPassesTestMixin):
@@ -154,4 +173,4 @@ consulta_excluir = ConsultaDeleteView.as_view()
 plano_cadastro = PlanoSaudeCreateView.as_view()
 plano_lista = PlanoSaudeListView.as_view()
 plano_excluir = PlanoSaudeDeleteView.as_view()
-
+grafico_plano = DadosGraficoPlanosView.as_view()

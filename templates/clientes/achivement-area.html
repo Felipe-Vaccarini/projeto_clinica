@@ -1,0 +1,42 @@
+{% load static %}
+
+    <!-- Start Achivement Area -->
+    <section class="our-achievement section overlay">
+        <div class="container">
+            <div class="row">
+                <canvas id="grafico-planos" height="300"></canvas>
+            </div>
+        </div>
+    </section>
+    <!-- End Achivement Area -->
+  {% bootstrap_javascript jquery='full' %}
+
+# ATENÇÃO!!
+
+  <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+
+<script type="text/javascript">
+    $.get('{% url "dados-grafico-planos" %}', function(dados){
+      var ctx = $("#grafico-planos").get(0).getContext("2d");
+      rotulos = dados['labels']
+      valores = dados['datasets'][0]['data']
+
+      new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+              labels: rotulos,
+              datasets: [{
+                  data: valores,
+                  backgroundColor: [
+                      'rgba(153, 102, 255, 0.9)',
+                      'rgba(255, 206, 86, 0.9)',
+                      'rgba(255, 159, 64, 0.9)',
+                      'rgba(75, 192, 192, 0.9)',
+                      'rgba(255, 99, 132, 0.9)',
+                      'rgba(54, 162, 235, 0.9)',
+                  ]
+              }]
+          }
+      });
+    });
+</script>

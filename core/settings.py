@@ -22,7 +22,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_cpf_cnpj',
     'widget_tweaks',
-    
+    'chartjs',
+    'core',
     'accounts',
     'clientes',
     'medicos',
