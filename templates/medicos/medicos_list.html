@@ -6,6 +6,9 @@
 
 {% block accounts_container %}
 <h2>Medicos</h2>
+{% if user.is_staff or user.is_superuser %}
+<a href="{% url 'medicos:relatorio_medicos' %}">Clique aqui para ver o relatório dos médicos</a>
+{% endif %}
 <table class="table table-bordered">
     <thead>
         <tr>
