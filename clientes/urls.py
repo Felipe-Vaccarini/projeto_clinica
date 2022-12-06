@@ -13,5 +13,4 @@ urlpatterns = [
     path('registro/plano/', views.plano_cadastro, name='plano_cadastro'),
     path('admim/lista/planos/', views.plano_lista, name='plano_lista'),
     path('plano/excluir/<int:pk>', views.plano_excluir, name='plano_delete'),
-    path('dados-grafico-planos/', views.grafico_plano, name='dados-graficos-alunos'),
 ]
