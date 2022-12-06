@@ -147,6 +147,27 @@ class PlanoSaudeListView(LoginRequiredMixin, TestMixinIsAdmin, ListView):
         return PlanoSaude.objects.all().order_by('-pk')
 
 
+class LivrosGeneroViewGoogle(ListView):
+    template_name = "clientes/listlivrogenerogooglechart.html"
+    model = Cliente
+
+    def get_context_data(self, *args, **kwargs):
+        contexto = super().get_context_data(*args, **kwargs)
+        planos = PlanoSaude.objects.order_by('plano').all()
+        tabela = []
+        for p in planos:
+            tabela.append(
+                {
+                    'plano': p.plano,
+                    'quant': (Cliente.objects.filter(plano=p.pk)).count()
+                }
+            )
+
+        contexto['tabela'] = tabela
+        return contexto
+
+
+livrogenerogoogle = LivrosGeneroViewGoogle.as_view()
 cliente_cadastro = ClienteCreateView.as_view()
 cliente_atualizar = ClienteUpdateView.as_view()
 consulta_lista = ConsultaListView.as_view()
