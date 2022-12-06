@@ -5,3 +5,5 @@ django-widget-tweaks==1.4.9
 sqlparse==0.4.2
 django-extensions==3.1.5
 django-chartjs==2.3.0
+weasyprint==57.1
+django-weasyprint==2.2.0

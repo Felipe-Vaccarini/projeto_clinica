@@ -14,4 +14,5 @@ urlpatterns = [
     path('admim/lista/especialidades/', views.especialidade_lista, name="especialidade_lista"),
     path('especialidade/atualizar/<int:pk>/', views.especialidade_atualizar, name='especialidade_cadastro_atualizar'),
     path('especialidade/apagar/<int:pk>/', views.especialidade_deletar, name='especialidade_deletar'),
+    path('relatorio-medicos/', views.relatorio_medicos, name='relatorio_medicos')
 ]

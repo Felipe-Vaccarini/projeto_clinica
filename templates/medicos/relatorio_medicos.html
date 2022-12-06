@@ -1,0 +1,71 @@
+{% load static %}
+<html>
+<head>
+    <title>Relatório de Médicos</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap.min.css' %}" />
+</head>
+<body>
+    <center>
+        <br/>
+        <h1>Relatório de Médicos</h1>
+    </center>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Especialidade
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medico in medicos %}
+                <h3>{{ medico.nome }}</h3>
+                <tr>
+                    <td>
+                        <a href="">{{ medico.pk }}</a>
+                    </td>
+                    <td>
+                        {{ medico.nome }}
+                    </td>
+                    <td>
+                        {{ medico.especialidade }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                CRM
+            </th>
+            <th>
+                CPF
+            </th>
+            <th>
+                Contato
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                {{ medico.crm }}
+            </td>
+            <td>
+                {{ medico.cpf }}
+            </td>
+            <td>
+                {{ medico.email }}, {{ medico.telefone }}
+            </td>
+        </tr>
+    </table>
+    <hr>
+            {% endfor %}
+</body>
+</html>

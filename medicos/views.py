@@ -4,6 +4,26 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Medico, Agenda, Especialidade
+from django_weasyprint import WeasyTemplateView
+from django.core.files.storage import FileSystemStorage
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from weasyprint import HTML
+
+class RelatorioMedicosView(WeasyTemplateView):
+    def get(self, request, *args, **kwargs):
+        medicos = Medico.objects.order_by('nome').all()
+        html_string = render_to_string('medicos/relatorio_medicos.html', {'medicos': medicos})
+        html = HTML(string=html_string, base_url=request.build_absolute_uri())
+        html.write_pdf(target='/tmp/relatorio-medicos.pdf')
+        fs = FileSystemStorage('/tmp')
+
+        with fs.open('relatorio-medicos.pdf') as pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'inline; filename="relatorio-medicos.pdf'
+        return response
+
+
 
 class TestMixinIsAdmin(UserPassesTestMixin):
     def test_func(self):
@@ -128,3 +148,4 @@ agenda_cadastro = AgendaCreateView.as_view()
 agenda_atualizar = AgendaUpdateView.as_view()
 agenda_lista = AgendaListView.as_view()
 agenda_deletar = AgendaDeleteView.as_view()
+relatorio_medicos = RelatorioMedicosView.as_view()
