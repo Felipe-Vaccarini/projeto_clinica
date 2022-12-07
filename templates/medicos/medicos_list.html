@@ -1,42 +1,25 @@
-{% extends "accounts/index.html" %}
+{% extends "base.html" %}
 
 {% block title %}
     Medicos
 {% endblock %}
 
-{% block accounts_container %}
-<h2>Medicos</h2>
+{% block container %}
+<h1>Médicos</h1>
 {% if user.is_staff or user.is_superuser %}
 <a href="{% url 'medicos:relatorio_medicos' %}">Clique aqui para ver o relatório dos médicos</a>
 {% endif %}
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>
-                Foto
-            </th>
-            <th>
-                Nome
-            </th>
-            <th>
-                Especialidade
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+    <div class="container">
+        <div class="row">
+            <div class="row-md-4 row-md-offset-4">
         {% for medico in object_list %}
-        <tr>
-            <td>
-                <img height="250" width="250" src="{{ medico.foto.url }}">
-            </td>
-            <td>
-                {{ medico.nome }}
-            </td>
-            <td>
-                {{ medico.especialidade }}
-            </td>
-        </tr>
+
+            <img height="300" width="350" src="{{ medico.foto.url }}">
+                <h4>Nome: {{ medico.nome }}</h4>
+            <h4>Especialidade: {{ medico.especialidade }}</h4> <br/>
+
         {% endfor %}
-    </tbody>
-</table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -24,6 +24,9 @@
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
             <li>
+              <a href="{% url 'medicos:medicos_lista'%}">Medicos</a>
+            </li>
+            <li>
               <a href="{% url 'clientes:consulta_create'%}">Consultar</a>
             </li>
             {% if user.is_staff or user.is_superuser %}
@@ -40,13 +43,13 @@
               <a href="{% url 'clientes:plano_cadastro'%}">Cadastrar Plano</a>
             </li>
             <li>
-              <a href="{% url 'clientes:livrogenerogoogle' %}">Gráfico de Planos</a>
+              <a href="{% url 'clientes:graficoplanos' %}">Dados Planos</a>
             </li>
             {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-              <li><a href="{% url 'accounts:index' %}">Minha Conta</a></li>
+              <li><a href="{% url 'accounts:index' %}">Conta</a></li>
               <li><a href="{% url 'accounts:logout' %}">Sair</a></li>
             {% else %}
               <li><a href="{% url 'accounts:login' %}">Entrar</a></li>

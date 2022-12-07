@@ -147,8 +147,8 @@ class PlanoSaudeListView(LoginRequiredMixin, TestMixinIsAdmin, ListView):
         return PlanoSaude.objects.all().order_by('-pk')
 
 
-class LivrosGeneroViewGoogle(ListView):
-    template_name = "clientes/listlivrogenerogooglechart.html"
+class GraficoPlanosView(ListView):
+    template_name = "clientes/graficoplanos.html"
     model = Cliente
 
     def get_context_data(self, *args, **kwargs):
@@ -167,7 +167,7 @@ class LivrosGeneroViewGoogle(ListView):
         return contexto
 
 
-livrogenerogoogle = LivrosGeneroViewGoogle.as_view()
+graficoplanos = GraficoPlanosView.as_view()
 cliente_cadastro = ClienteCreateView.as_view()
 cliente_atualizar = ClienteUpdateView.as_view()
 consulta_lista = ConsultaListView.as_view()

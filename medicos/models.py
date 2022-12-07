@@ -18,7 +18,7 @@ class Medico(models.Model):
     nome = models.CharField(verbose_name="Nome", max_length=200)
     crm = models.CharField(verbose_name="CRM", max_length=200)
     especialidade = ForeignKey(Especialidade,
-                               on_delete=models.CASCADE,
+                               on_delete=models.PROTECT,
                                related_name='medicos')
     cpf = CPFField(verbose_name="CPF",
                    max_length=50,
